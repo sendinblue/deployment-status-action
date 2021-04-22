@@ -6,7 +6,7 @@ inputs:
     description: 'GitHub token to access the Deployments API (usually $GITHUB_TOKEN).'
     required: true
   deployment-id:
-    description: 'Deployment ID (usually ${{ github.event.deployment.id }}).'
+    description: "Deployment ID (usually ${{ github.event.deployment.id }})."
     required: true
   status:
     description: 'The state of the status. Can be one of "error", "failure", "inactive", "in_progress", "queued pending", or "success".'
