@@ -1,0 +1,25 @@
+name: Deployment Status Action
+description: GitHub action for the deployment status update.
+
+inputs:
+  token:
+    description: GitHub token to access the Deployments API (usually $GITHUB_TOKEN).
+    required: true
+  deployment-id:
+    description: Deployment ID (usually ${{ github.event.deployment.id }}).
+    required: true
+  status:
+    description: The state of the status. Can be one of "error", "failure", "inactive", "in_progress", "queued pending", or "success".
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Update status
+      run: |
+        curl \
+          --header "Authorization: token ${{ inputs.token }}" \
+          --header "Accept: application/vnd.github.v3+json" \
+          --request POST \
+          https://api.github.com/repos/${{ github.repository }}/deployments/${{ inputs.deployment-id }}/statuses \
+          --data '{"state":"${{ inputs.status }}"}'
+      shell: bash
