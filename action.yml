@@ -17,6 +17,7 @@ runs:
     - name: Update status
       run: |
         curl \
+          --fail \
           --header "Authorization: token ${{ inputs.token }}" \
           --header "Accept: application/vnd.github.v3+json" \
           --request POST \
